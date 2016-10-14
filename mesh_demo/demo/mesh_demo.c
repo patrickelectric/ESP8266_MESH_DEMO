@@ -399,8 +399,8 @@ void user_init(void)
     /*
      * set uart baut ratio
      */
-    uart_div_modify(0, UART_CLK_FREQ / UART_BAUT_RATIO);
-    uart_div_modify(1, UART_CLK_FREQ / UART_BAUT_RATIO);
+    uart_div_modify(0, UART_CLK_FREQ / UART_BAUD_RATIO);
+    uart_div_modify(1, UART_CLK_FREQ / UART_BAUD_RATIO);
 
     if (!router_init()) {
         return;
