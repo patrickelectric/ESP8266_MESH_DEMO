@@ -246,6 +246,11 @@ void ICACHE_FLASH_ATTR esp_mesh_demo_test()
     MESH_DEMO_FREE(header);
 }
 
+void ICACHE_FLASH_ATTR esp_mesh_rebuild_fail(void *para)
+{
+    espconn_mesh_enable(mesh_enable_cb, MESH_ONLINE);
+}
+
 void ICACHE_FLASH_ATTR esp_mesh_new_child_notify(void *mac)
 {
     if (!mac)
@@ -306,6 +311,11 @@ bool ICACHE_FLASH_ATTR esp_mesh_demo_init()
      * when new child joins current AP, system will call the callback
      */
     espconn_mesh_regist_usr_cb(esp_mesh_new_child_notify);
+
+    /*
+     * when node fails to rebuild mesh, system will call the callback
+     */
+    espconn_mesh_regist_rebuild_fail_cb((espconn_mesh_usr_callback)esp_mesh_rebuild_fail);
 
     return true;
 }
